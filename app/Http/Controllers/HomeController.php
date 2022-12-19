@@ -13,7 +13,8 @@ class HomeController extends Controller
         }
 
         $navbar = "home";
+        $bootstrap = "true";
 
-        return view("home", ["navbar"=>$navbar]);
+        return view("home", ["navbar"=>$navbar, "bootstrap"=>$bootstrap]);
     }
 }

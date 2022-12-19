@@ -1,7 +1,6 @@
-<x-header />
+<x-header :bootstrap="$bootstrap"/>
 <x-navbar :navbar="$navbar"/>
 
-<div>
-    <h1>Home</h1>
-
+<div class="home-container">
+    <img src="img/logo.png" alt="">
 </div>

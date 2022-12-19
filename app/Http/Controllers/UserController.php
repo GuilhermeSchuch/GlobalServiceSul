@@ -8,7 +8,9 @@ use Session;
 class UserController extends Controller
 {
     public function index(){
-        return view("login");
+        $bootstrap = "false";
+
+        return view("login", ["bootstrap"=>$bootstrap]);
     }
 
     public function login(Request $request){

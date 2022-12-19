@@ -1,4 +1,4 @@
-<x-header />
+<x-header :bootstrap="$bootstrap"/>
 
     @if (Session::get('error'))
         <div class="alert alert-danger msg">{{ Session::get('error') }}</div>
@@ -22,7 +22,7 @@
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="Senha" name="login_password" id="login_password"/>
             </div>
-            <input type="submit" value="Login" class="btn solid" />
+            <input type="submit" value="Login" class="btn-auth solid" />
           </form>
           <form action="{{ route('register') }}" class="sign-up-form" method="POST">
             {{ csrf_field() }}
@@ -53,7 +53,7 @@
                 <input type="password" placeholder="Confirmar senha" name="confirmpassword" id="confirmpassword"/>
               </div>
 
-            <input type="submit" class="btn" value="Sign up" />
+            <input type="submit" class="btn-auth" value="Sign up" />
           </form>
         </div>
       </div>
@@ -65,7 +65,7 @@
             <p>
               Crie sua conta!
             </p>
-            <button class="btn transparent" id="sign-up-btn">Cadastrar</button>
+            <button class="btn-auth transparent" id="sign-up-btn">Cadastrar</button>
           </div>
           {{-- <img src="img/log.svg" class="image" alt="" /> --}}
           <img src="img/logo.png" class="image" alt="" />
@@ -76,7 +76,7 @@
             <p>
               Acesse a página de Login!
             </p>
-            <button class="btn transparent" id="sign-in-btn">
+            <button class="btn-auth transparent" id="sign-in-btn">
               Login
             </button>
           </div>

@@ -11,9 +11,12 @@ class header extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $bootstrap;
+
+    public function __construct($bootstrap)
     {
-        //
+        $this->bootstrap = $bootstrap;
     }
 
     /**
