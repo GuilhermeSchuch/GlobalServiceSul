@@ -553,8 +553,7 @@ tr:nth-child(odd) {
 }
 
 tr:hover td {
-  color: #44b478;
-  cursor: pointer;
+  color: var(--main-bg-color);
   background-color: #ffffff;
 }
 
@@ -576,5 +575,10 @@ td button {
 
 ::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+/* SERVICE */
+.service-container{
+
 }
 

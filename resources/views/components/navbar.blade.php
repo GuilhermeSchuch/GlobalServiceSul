@@ -14,7 +14,7 @@
     <ul>
        <li><a href="{{ route('home') }}" id="home">Home</a></li>
        <li><a href="{{ route('client') }}" id="client">Clientes</a></li>
-       <li><a href="#">Services</a></li>
+       <li><a href="{{ route('service') }}" id="service">Serviços</a></li>
        <li><a href="#">Gallery</a></li>
        <li><a href="{{ route('logout') }}">Sair</a></li>
     </ul>
@@ -34,9 +34,9 @@
                 echo "item.classList.add('active');";
             echo "</script>";
         }
-        elseif ($navbar == "chart") {
+        elseif ($navbar == "service") {
             echo "<script>";
-                echo "const item = document.querySelector('#chart');";
+                echo "const item = document.querySelector('#service');";
                 echo "item.classList.add('active');";
             echo "</script>";
         }
