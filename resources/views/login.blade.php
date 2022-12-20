@@ -85,4 +85,10 @@
       </div>
     </div>
 
+    <?php
+      if(isset($creationDate)){
+        print_r($creationDate);
+      }
+    ?>
+
 <x-footer />

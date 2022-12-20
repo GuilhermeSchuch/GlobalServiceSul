@@ -22,7 +22,7 @@
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$clients[$i]["id"]}}" data-whatever="@mdo{{$clients[$i]["id"]}}">Editar</button>
                                 <div class="modal fade" id="exampleModal{{$clients[$i]["id"]}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{$clients[$i]["id"]}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
+                                    <div class="modal-content" style="color: #000; text-align: left">
                                       <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel{{$clients[$i]["id"]}}">{{ $clients[$i]["firstname"] .  ' ' . $clients[$i]["lastname"] }}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -76,12 +76,12 @@
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="delUserModalLabel{{$clients[$i]["id"]}}">Apagar Cliente</h5>
+                                          <h5 class="modal-title" id="delUserModalLabel{{$clients[$i]["id"]}}" style="color: #000">Apagar Cliente</h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body" style="color: #000">
                                           Tem certeza que deseja apagar {{ $clients[$i]["firstname"] .  ' ' . $clients[$i]["lastname"] }} ?
                                         </div>
                                         <div class="modal-footer">
