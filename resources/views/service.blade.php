@@ -17,8 +17,18 @@
                     <tbody>
                         <?php for($i = 0; $i < count($services); $i++): ?>
                             <tr>
-                                <td>{{ $services[$i]["name"] }}</td>
+                                <td>
+                                    {{ $services[$i]["name"] }}
+                                    
+                                    @if ($services[$i]["status"] === 1)
+                                        <img src="{{ url('img/flaticon/pending.png') }}" alt="Pendente" width="30px">
+                                    @else
+                                        <img src="{{ url('img/flaticon/done.png') }}" alt="Concluido" width="30px">
+                                    @endif
+                                </td>
+
                                 <td>{{ $services[$i]["firstname"] . ' ' . $services[$i]["lastname"]}}</td>
+
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ $services[$i]["id"] }}" data-whatever="@mdo{{ $services[$i]["id"] }}">Editar</button>
                                     <div class="modal fade" id="exampleModal{{ $services[$i]["id"] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ $services[$i]["id"] }}" aria-hidden="true">
@@ -44,6 +54,28 @@
                                                 <label for="description" class="col-form-label">Descrição:</label>
                                                 {{-- <input type="text" class="form-control" id="description" name="description" value="{{ $services[$i]["description"] }}"> --}}
                                                 <textarea class="form-control" id="description" name="description">{{ $services[$i]["description"] }}</textarea>
+                                            </div>
+
+                                            <div class="form-group" style="min-width: 230px">
+                                                <label for="status" class="col-form-label">Status:</label>
+                                                <select class="form-control" id="status" name="status">
+                                                    <?php if(isset($status)): ?>
+                                                        <?php 
+                                                            foreach ($status as $stats) {
+                                                                if($services[$i]["status"] == $stats["id"]){
+                                                                    echo "<option value='" . $stats["id"] . "' selected>";
+                                                                        echo $stats["status"];
+                                                                    echo "</option>";
+                                                                }
+                                                                else{
+                                                                    echo "<option value='" . $stats["id"] . "'>";
+                                                                        echo $stats["status"];
+                                                                    echo "</option>";
+                                                                }
+                                                            } 
+                                                        ?>
+                                                <?php endif; ?>
+                                                </select>
                                             </div>
 
                                             <div class="form-group" style="min-width: 230px">
