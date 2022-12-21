@@ -64,6 +64,7 @@ class ClientController extends Controller
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $complement = $request->input('complement');
+        $cpf = $request->input('cpf');
         $address = $request->input('address');
         $telefone = $request->input('telefone');
 
@@ -73,6 +74,7 @@ class ClientController extends Controller
         `firstname` = '$firstname', 
         `lastname` = '$lastname', 
         `complement` = '$complement', 
+        `cpf` = '$cpf', 
         `address` = '$address', 
         `telefone` = '$telefone' 
         WHERE `client`.`id` = '$id'");
@@ -86,11 +88,12 @@ class ClientController extends Controller
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $complement = $request->input('complement');
+        $cpf = $request->input('cpf');
         $address = $request->input('address');
         $telefone = $request->input('telefone');
 
         $pdo = \DB::connection()->getPdo();
-        $stmt = $pdo->prepare("INSERT INTO client (firstname, lastname, complement, address, telefone) VALUES ('$firstname', '$lastname', '$complement', '$address', '$telefone')");
+        $stmt = $pdo->prepare("INSERT INTO client (firstname, lastname, complement, address, telefone, cpf) VALUES ('$firstname', '$lastname', '$complement', '$address', '$telefone', '$cpf')");
         $result = $stmt->execute();
 
         return redirect('client')->with("error", "Impossível deletar borda relacionada à um pedido!");
