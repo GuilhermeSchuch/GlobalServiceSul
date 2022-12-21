@@ -22,6 +22,3 @@ Route::get('/service', 'App\Http\Controllers\ServiceController@index')->name('se
 Route::delete('/service/{id}', 'App\Http\Controllers\ServiceController@destroy')->name('service.destroy');
 Route::put('/service/{id}', 'App\Http\Controllers\ServiceController@update')->name('service.update');
 Route::post('/service', 'App\Http\Controllers\ServiceController@store')->name('service.post');
-
-// SEARCH
-Route::get('/search?q={query}', 'App\Http\Controllers\SearchController@index')->name('search');

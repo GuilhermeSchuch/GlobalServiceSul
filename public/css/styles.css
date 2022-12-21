@@ -118,6 +118,11 @@ input[type="checkbox"]{
   }
 }
 
+.search-form{
+  display: flex;
+  flex-direction: row;
+}
+
 
 /* BASIC */
 * {

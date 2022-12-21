@@ -13,17 +13,23 @@
 
     <ul>
        <li>
-            <form action="" method="GET" id="search-form" >
+            <form action="" method="GET" id="search-form" class="search-form">
                 @if ($navbar === "service")
                     @if (request()["query"])
-                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise por identificador" value="{{ request()['query'] }}">
+                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo idr" value="{{ request()['query'] }}">
+                        <a href="{{ route('service') }}">Limpar</a>
                     @else
-                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise por identificador">
+                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo id">
                     @endif
                 @endif
 
                 @if ($navbar === "client")
-                    <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo nome">
+                    @if (request()["query"])
+                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo nome" value="{{ request()['query'] }}">
+                        <a href="{{ route('client') }}">Limpar</a>
+                    @else
+                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo nome">
+                    @endif
                 @endif
                 
                 <button class="btn my-2 my-sm-0" type="submit" style="display: none"></button>

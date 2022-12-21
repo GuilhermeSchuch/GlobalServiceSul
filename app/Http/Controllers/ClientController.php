@@ -7,10 +7,13 @@ use App\Models\ClientModel;
 
 class ClientController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         if(!\Session::get('user')){
             return redirect('auth')->with("error", "Você precisa estar logado!");
         }
+
+        $navbar = "client";
+        $bootstrap = "true";
 
         $pdo = \DB::connection()->getPdo();
         $stmt = $pdo->prepare("SELECT * FROM client");
@@ -19,11 +22,27 @@ class ClientController extends Controller
         if($stmt->rowCount() > 0){
             $clients = $stmt->fetchAll();
         }
+        else{
+            $clients = [];
+        }
 
-        $navbar = "client";
-        $bootstrap = "true";
 
-        return view('client', ["navbar"=>$navbar, "clients"=>$clients, "bootstrap"=>$bootstrap]);
+        $query = $request["query"] ?? '';
+
+        if($query){
+            $pdo = \DB::connection()->getPdo();
+            $stmt = $pdo->prepare("SELECT * FROM client WHERE client.firstname LIKE " . '"%' . $query . '%"' . "OR client.lastname LIKE" . '"%' . $query . '%"');
+            $result = $stmt->execute();
+    
+            if($stmt->rowCount() > 0){
+                $clients = $stmt->fetchAll();
+            }
+            else{
+                $clients = [];
+            }
+        }
+
+        return view('client', ["navbar"=>$navbar, "clients"=>$clients, "bootstrap"=>$bootstrap, "query"=>$query]);
     }
 
     public function destroy($id){
