@@ -80,7 +80,7 @@
 
                                             <div class="form-group" style="min-width: 230px">
                                                 <label for="creationDate" class="col-form-label">Data de criação:</label>
-                                                <input type="text" class="form-control" id="creationDate" name="creationDate" value="{{ $services[$i]["creationDate"] }}" disabled>
+                                                <input type="text" class="form-control" id="creationDate" name="creationDate" value="{{ date('d/m/Y',  strtotime($services[$i]["creationDate"])) }}" disabled>
                                             </div>
 
                                             <div class="form-group" style="min-width: 230px">
@@ -186,7 +186,7 @@
           </div>
 
           <div class="form-group" style="min-width: 230px">
-            <label for="creationDate" class="col-form-label">Data de criação(A/M/D): </label>
+            <label for="creationDate" class="col-form-label">Data de criação: </label>
             <input type="date" class="form-control" id="creationDate" name="creationDate">
           </div>
 
