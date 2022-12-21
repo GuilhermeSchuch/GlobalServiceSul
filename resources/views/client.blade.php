@@ -44,9 +44,9 @@
                                             <input type="text" class="form-control" id="lastname" name="lastname" value="{{$clients[$i]["lastname"]}}">
                                           </div>
 
-                                          <div class="form-group">
-                                            <label for="cpf" class="col-form-label">CPF:</label>
-                                            <input type="text" class="form-control" id="cpf" name="cpf" value="{{$clients[$i]["cpf"]}}">
+                                          <div class="form-group" style="width: 230px">
+                                            <label for="complement" class="col-form-label">Complemento:</label>
+                                            <textarea class="form-control" id="complement" name="complement" placeholder="Insira um complemento">{{$clients[$i]["complement"]}}</textarea>
                                           </div>
 
                                           <div class="form-group">
@@ -130,9 +130,10 @@
             <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Insira o sobrenome">
           </div>
 
-          <div class="form-group">
-            <label for="cpf" class="col-form-label">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Insira o CPF">
+          <div class="form-group" style="width: 230px">
+            <label for="complement" class="col-form-label">Complemento:</label>
+            {{-- <input type="text" class="form-control" id="complement" name="complement" placeholder="Insira o Complemento"> --}}
+            <textarea class="form-control" id="complement" name="complement" placeholder="Insira um complemento"></textarea>
           </div>
 
           <div class="form-group">

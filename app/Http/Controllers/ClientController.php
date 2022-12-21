@@ -63,7 +63,7 @@ class ClientController extends Controller
 
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
-        $cpf = $request->input('cpf');
+        $complement = $request->input('complement');
         $address = $request->input('address');
         $telefone = $request->input('telefone');
 
@@ -72,7 +72,7 @@ class ClientController extends Controller
         $stmt = $pdo->prepare("UPDATE `client` SET 
         `firstname` = '$firstname', 
         `lastname` = '$lastname', 
-        `cpf` = '$cpf', 
+        `complement` = '$complement', 
         `address` = '$address', 
         `telefone` = '$telefone' 
         WHERE `client`.`id` = '$id'");
@@ -85,12 +85,12 @@ class ClientController extends Controller
     public function store(Request $request){
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
-        $cpf = $request->input('cpf');
+        $complement = $request->input('complement');
         $address = $request->input('address');
         $telefone = $request->input('telefone');
 
         $pdo = \DB::connection()->getPdo();
-        $stmt = $pdo->prepare("INSERT INTO client (firstname, lastname, cpf, address, telefone) VALUES ('$firstname', '$lastname', '$cpf', '$address', '$telefone')");
+        $stmt = $pdo->prepare("INSERT INTO client (firstname, lastname, complement, address, telefone) VALUES ('$firstname', '$lastname', '$complement', '$address', '$telefone')");
         $result = $stmt->execute();
 
         return redirect('client')->with("error", "Impossível deletar borda relacionada à um pedido!");
