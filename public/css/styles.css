@@ -36,10 +36,15 @@ nav .logo{
 nav ul{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   list-style: none;
+  /* border: 1px solid green; */
 }
 nav ul li{
   margin: 0 5px;
+  min-height: 100%;
+  /* border: 1px solid rgb(38, 0, 255); */
 }
 nav ul li a{
   color: #f2f2f2;
@@ -52,7 +57,8 @@ nav ul li a{
   transition: all 0.3s ease;
 }
 nav ul li a.active,
-nav ul li a:hover{
+nav ul li a:hover
+{
   color: #fff;
   background: #000;
 }
@@ -111,6 +117,7 @@ input[type="checkbox"]{
     color: cyan;
   }
 }
+
 
 /* BASIC */
 * {
@@ -529,7 +536,7 @@ table {
 }
 
 .header_fixed thead th {
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   background-color: black;
   color: #e6e7e8;

@@ -12,10 +12,27 @@
     </label>
 
     <ul>
+       <li>
+            <form action="" method="GET" id="search-form" >
+                @if ($navbar === "service")
+                    @if (request()["query"])
+                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise por identificador" value="{{ request()['query'] }}">
+                    @else
+                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise por identificador">
+                    @endif
+                @endif
+
+                @if ($navbar === "client")
+                    <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo nome">
+                @endif
+                
+                <button class="btn my-2 my-sm-0" type="submit" style="display: none"></button>
+            </form>
+       </li>
+       
        <li><a href="{{ route('home') }}" id="home">Home</a></li>
        <li><a href="{{ route('client') }}" id="client">Clientes</a></li>
        <li><a href="{{ route('service') }}" id="service">Serviços</a></li>
-       <li><a href="#">Gallery</a></li>
        <li><a href="{{ route('logout') }}">Sair</a></li>
     </ul>
  </nav>
