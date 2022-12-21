@@ -22,7 +22,18 @@ class ServiceController extends Controller
         }
 
         $pdo = \DB::connection()->getPdo();
-        $stmt = $pdo->prepare("SELECT s.id, s.name, s.description, s.creationDate, s.endingDate, s.id_client, c.firstname, c.lastname FROM service s JOIN client c ON s.id_client = c.id");
+        $stmt = $pdo->prepare("SELECT * FROM service_status");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $status = $stmt->fetchAll();
+        }
+        else{
+            $status = [];
+        }
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT s.id, s.name, s.status, s.description, s.creationDate, s.endingDate, s.id_client, c.firstname, c.lastname FROM service s JOIN client c ON s.id_client = c.id ORDER BY s.creationDate");
         $result = $stmt->execute();
 
         if($stmt->rowCount() > 0){
@@ -33,7 +44,7 @@ class ServiceController extends Controller
         }
         
 
-        return view("service", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "services"=>$services, "clients"=>$clients]);
+        return view("service", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "services"=>$services, "clients"=>$clients, "status"=>$status]);
     }
 
     public function destroy($id){
@@ -71,6 +82,7 @@ class ServiceController extends Controller
         $name = $request->input('name');
         $description = $request->input('description');
         $endingDate = $request->input('endingDate');
+        $status = $request->input('status');
         $client = $request->input('client');
 
         $pdo = \DB::connection()->getPdo();
@@ -79,6 +91,7 @@ class ServiceController extends Controller
         `name` = '$name', 
         `description` = '$description', 
         `endingDate` = '$endingDate', 
+        `status` = '$status', 
         `id_client` = '$client' 
         WHERE `service`.`id` = '$id'");
 
