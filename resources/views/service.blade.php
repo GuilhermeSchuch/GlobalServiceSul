@@ -83,10 +83,12 @@
                                                 <input type="text" class="form-control" id="creationDate" name="creationDate" value="{{ date('d/m/Y',  strtotime($services[$i]["creationDate"])) }}" disabled>
                                             </div>
 
-                                            <div class="form-group" style="min-width: 230px">
-                                                <label for="endingDate" class="col-form-label">Data serviço finalizado:</label>
-                                                <input type="date" class="form-control" id="endingDate" name="endingDate" value="{{ $services[$i]["endingDate"] }}">
-                                            </div>
+                                            @if ($services[$i]["status"] == 2)
+                                                <div class="form-group" style="min-width: 230px">
+                                                    <label for="endingDate" class="col-form-label">Data serviço finalizado:</label>
+                                                    <input type="date" class="form-control" id="endingDate" name="endingDate" value="{{ $services[$i]["endingDate"] }}" disabled>
+                                                </div>
+                                            @endif
 
                                             <div class="form-group" style="min-width: 230px">
                                                 <label for="client" class="col-form-label">Cliente:</label>
@@ -109,6 +111,11 @@
                                                         ?>
                                                     <?php endif; ?>
                                                 </select>
+                                            </div>
+
+                                            <div class="form-group" style="min-width: 230px">
+                                                <label for="identifier" class="col-form-label">Identificador:</label>
+                                                <input type="text" class="form-control" id="identifier" name="identifier" value="{{ $services[$i]["id"] }}" disabled>
                                             </div>
 
                                             <div class="modal-footer" style="min-width: 230px">

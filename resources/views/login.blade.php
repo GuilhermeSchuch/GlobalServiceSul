@@ -61,11 +61,11 @@
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
-            <h3>Novo por aqui ?</h3>
+            {{-- <h3>Novo por aqui ?</h3>
             <p>
               Crie sua conta!
             </p>
-            <button class="btn-auth transparent" id="sign-up-btn">Cadastrar</button>
+            <button class="btn-auth transparent" id="sign-up-btn">Cadastrar</button> --}}
           </div>
           {{-- <img src="img/log.svg" class="image" alt="" /> --}}
           <img src="img/logo.png" class="image" alt="" />
@@ -84,11 +84,5 @@
         </div>
       </div>
     </div>
-
-    <?php
-      if(isset($creationDate)){
-        print_r($creationDate);
-      }
-    ?>
 
 <x-footer />
