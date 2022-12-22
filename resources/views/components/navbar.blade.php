@@ -1,7 +1,7 @@
 <nav>
     <div class="logo">
         <a href="{{ route('home') }}">
-            <img src="img/logo.png" alt="" width="40px" height="40px"/>
+            <img src="{{ url('img/logo.png') }}" alt="" width="40px" height="40px"/>
             <span>Global</span>
         </a>
     </div>

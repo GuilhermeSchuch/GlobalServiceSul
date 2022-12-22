@@ -19,6 +19,8 @@ Route::post('/client', 'App\Http\Controllers\ClientController@store')->name('cli
 
 // SERVICE
 Route::get('/service', 'App\Http\Controllers\ServiceController@index')->name('service');
+Route::get('/service/filter/pending', 'App\Http\Controllers\ServiceController@showPending')->name('service.pending');
+Route::get('/service/filter/done', 'App\Http\Controllers\ServiceController@showDone')->name('service.done');
 Route::delete('/service/{id}', 'App\Http\Controllers\ServiceController@destroy')->name('service.destroy');
 Route::put('/service/{id}', 'App\Http\Controllers\ServiceController@update')->name('service.update');
 Route::post('/service', 'App\Http\Controllers\ServiceController@store')->name('service.post');
