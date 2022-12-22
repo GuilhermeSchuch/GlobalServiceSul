@@ -93,6 +93,7 @@ input[type="checkbox"]{
     text-align: center;
     display: block;
     transition: all 0.3s ease;
+    z-index: 98;
   }
   #click:checked ~ ul{
     left: 0;
@@ -593,4 +594,3 @@ td button {
 .service-container{
 
 }
-

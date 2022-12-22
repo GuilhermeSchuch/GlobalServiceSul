@@ -57,10 +57,120 @@ class ServiceController extends Controller
                 $services = [];
             }
         }
-        
 
         return view("service", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "services"=>$services, "clients"=>$clients, "status"=>$status]);
     }
+
+    public function showPending(){
+        $navbar = "service";
+        $bootstrap = "true";
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT client.firstname, client.lastname, client.id FROM client");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $clients = $stmt->fetchAll();
+        }
+        else{
+            $clients = [];
+        }
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT * FROM service_status");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $status = $stmt->fetchAll();
+        }
+        else{
+            $status = [];
+        }
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT s.id, s.name, s.status, s.description, s.creationDate, s.endingDate, s.id_client, c.firstname, c.lastname FROM service s JOIN client c ON s.id_client = c.id WHERE s.status = '1' ORDER BY s.creationDate");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $services = $stmt->fetchAll();
+        }
+        else{
+            $services = [];
+        }
+
+        $query = $request["query"] ?? '';
+
+        if($query != ''){
+            $pdo = \DB::connection()->getPdo();
+            $stmt = $pdo->prepare("SELECT s.id, s.name, s.status, s.description, s.creationDate, s.endingDate, s.id_client, c.firstname, c.lastname FROM service s JOIN client c ON s.id_client = c.id WHERE s.id = '$query'");
+            $result = $stmt->execute();
+    
+            if($stmt->rowCount() > 0){
+                $services = $stmt->fetchAll();
+            }
+            else{
+                $services = [];
+            }
+        }
+
+        return view("service", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "services"=>$services, "clients"=>$clients, "status"=>$status]);
+    }
+
+    public function showDone(){
+        $navbar = "service";
+        $bootstrap = "true";
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT client.firstname, client.lastname, client.id FROM client");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $clients = $stmt->fetchAll();
+        }
+        else{
+            $clients = [];
+        }
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT * FROM service_status");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $status = $stmt->fetchAll();
+        }
+        else{
+            $status = [];
+        }
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT s.id, s.name, s.status, s.description, s.creationDate, s.endingDate, s.id_client, c.firstname, c.lastname FROM service s JOIN client c ON s.id_client = c.id WHERE s.status = '2' ORDER BY s.creationDate");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $services = $stmt->fetchAll();
+        }
+        else{
+            $services = [];
+        }
+
+        $query = $request["query"] ?? '';
+
+        if($query != ''){
+            $pdo = \DB::connection()->getPdo();
+            $stmt = $pdo->prepare("SELECT s.id, s.name, s.status, s.description, s.creationDate, s.endingDate, s.id_client, c.firstname, c.lastname FROM service s JOIN client c ON s.id_client = c.id WHERE s.id = '$query'");
+            $result = $stmt->execute();
+    
+            if($stmt->rowCount() > 0){
+                $services = $stmt->fetchAll();
+            }
+            else{
+                $services = [];
+            }
+        }
+
+        return view("service", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "services"=>$services, "clients"=>$clients, "status"=>$status]);
+    }
+
 
     public function destroy($id){
         try{
