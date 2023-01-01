@@ -528,7 +528,6 @@ form.sign-in-form {
   background-color: #adacac;
 }
 
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -566,7 +565,6 @@ tr:nth-child(odd) {
 }
 
 tr:hover td {
-  color: var(--main-bg-color);
   background-color: #ffffff;
 }
 
@@ -594,7 +592,6 @@ td button {
 .service-container{
 
 }
-
 
 .dropdown-item:hover{
   background-color: #4481eb;
