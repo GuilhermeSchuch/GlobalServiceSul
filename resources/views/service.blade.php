@@ -6,11 +6,25 @@
         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filtrar por...
         </button>
-        <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            
+            <?php if(str_contains(url()->current(), "pending")): ?>
+                <a class="dropdown-item active" href="{{ route('service.pending') }}">Pendente</a>
+                <a class="dropdown-item" href="{{ route('service.done') }}">Concluido</a>
+                <a class="dropdown-item" href="{{ route('service') }}">Limpar filtro</a>
 
-            <a class="dropdown-item" href="{{ route('service.pending') }}">Pendente</a>
-            <a class="dropdown-item" href="{{ route('service.done') }}">Concluido</a>
-            <a class="dropdown-item" href="{{ route('service') }}">Limpar filtro</a>
+            <?php elseif(str_contains(url()->current(), "done")): ?>
+                <a class="dropdown-item" href="{{ route('service.pending') }}">Pendente</a>
+                <a class="dropdown-item active" href="{{ route('service.done') }}">Concluido</a>
+                <a class="dropdown-item" href="{{ route('service') }}">Limpar filtro</a>
+
+            <?php else: ?>
+                <a class="dropdown-item" href="{{ route('service.pending') }}">Pendente</a>
+                <a class="dropdown-item" href="{{ route('service.done') }}">Concluido</a>
+                <a class="dropdown-item" href="{{ route('service') }}">Limpar filtro</a>
+            <?php endif; ?>
+
+
         </div>
     </div>
 </div>
