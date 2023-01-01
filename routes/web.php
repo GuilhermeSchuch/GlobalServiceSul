@@ -24,3 +24,6 @@ Route::get('/service/filter/done', 'App\Http\Controllers\ServiceController@showD
 Route::delete('/service/{id}', 'App\Http\Controllers\ServiceController@destroy')->name('service.destroy');
 Route::put('/service/{id}', 'App\Http\Controllers\ServiceController@update')->name('service.update');
 Route::post('/service', 'App\Http\Controllers\ServiceController@store')->name('service.post');
+
+// PDF
+Route::get('/{id}/pdf', 'App\Http\Controllers\PdfController@index')->name('pdf');

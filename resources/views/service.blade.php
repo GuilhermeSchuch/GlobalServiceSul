@@ -60,7 +60,7 @@
                                     <td>{{ $services[$i]["firstname"] . ' ' . $services[$i]["lastname"]}}</td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ $services[$i]["id"] }}" data-whatever="@mdo{{ $services[$i]["id"] }}">Editar</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ $services[$i]["id"] }}" data-whatever="@mdo{{ $services[$i]["id"] }}">Ver mais</button>
                                         <div class="modal fade" id="exampleModal{{ $services[$i]["id"] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ $services[$i]["id"] }}" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -146,6 +146,12 @@
                                                 <div class="form-group" style="min-width: 230px">
                                                     <label for="identifier" class="col-form-label">Identificador:</label>
                                                     <input type="text" class="form-control" id="identifier" name="identifier" value="{{ $services[$i]["id"] }}" disabled>
+                                                </div>
+
+                                                <div class="form-group" style="min-width: 230px">
+                                                    @if ($services[$i]["status"] == 2)
+                                                        <a href="{{ route('pdf', $services[$i]['id']) }}" target="_blank">Gerar nota</a>
+                                                    @endif
                                                 </div>
 
                                                 <div class="modal-footer" style="min-width: 230px">
