@@ -36,9 +36,9 @@
             </form>
        </li>
        
-       <li><a href="{{ route('home') }}" id="home">Home</a></li>
        <li><a href="{{ route('client') }}" id="client">Clientes</a></li>
        <li><a href="{{ route('service') }}" id="service">Serviços</a></li>
+       <li><a href="{{ route('service') }}" id="service">Orçamentos</a></li>
        <li><a href="{{ route('logout') }}">Sair</a></li>
     </ul>
  </nav>
