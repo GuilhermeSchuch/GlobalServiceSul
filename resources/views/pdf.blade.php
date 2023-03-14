@@ -68,7 +68,6 @@
         overflow: auto;
         border: 1px solid #dddddd;
         text-align: center;
-        
     }
 
     .header_fixed thead th {
@@ -83,10 +82,11 @@
     th,
     td {
         border-bottom: 1px solid #dddddd;
-        padding: 10px 20px;
-        font-size: 14px;
+        padding: 10px 15px;
+        font-size: 13.9px;
         text-align: center;
     }
+
 
     tr:nth-child(even) {
         background-color: #dddddd;
@@ -104,7 +104,7 @@
 
 <body>
     <div class="pdf-container">
-        
+
         <div class="logo">
             <h1>
                 GLOBALSERVICESUL INFORMATICA E ELETRONICA
@@ -119,42 +119,44 @@
 
         <div class="data">
             <div class="data-header">
-                <h1>ORÇAMENTO - Nº. 0003</h1>
+                <h1>ORÇAMENTO - Nº. {{ $id }}</h1>
             </div>
 
             <?php
 
-                if(isset($data)){
-
+                if(isset($client)){
                     echo "<div class='data-container'>";
-                        echo "<span class='bold'>Razão Social / Nome: </span>"; echo $data["firstname"] . ' ' . $data["lastname"];
+                        echo "<span class='bold'>Razão Social / Nome: </span>"; echo $client["firstname"] . ' ' . $client["lastname"];
                     echo "</div>";
 
                     echo "<div class='data-container'>";
-                        echo "<span class='bold'>Endereço: </span>"; echo $data["address"];
+                        echo "<span class='bold'>Endereço: </span>"; echo $client["address"];
                     echo "</div class='data-container'>";
 
                     echo "<div class='data-container'>";
-                        echo "<span class='bold'>Tel: </span>"; echo $data["telefone"];
+                        echo "<span class='bold'>Tel: </span>"; echo $client["telefone"];
                     echo "</div class='data-container'>";
 
                     echo "<div class='data-container'>";
-                        echo "<span class='bold'>CPF/CNPJ: </span>"; echo $data["cpf"];
+                        echo "<span class='bold'>CPF/CNPJ: </span>"; echo $client["cpf"];
                     echo "</div class='data-container'>";
 
-                    echo "<div class='data-container'>";
-                        echo "<span class='bold'>Data de emissão: </span>"; echo DateTime::createFromFormat('Y-m-d', $data["creationDate"])->format("d/m/Y");;
-                    echo "</div>";
                 }
+
             ?>
 
             <?php if(isset($services)): ?>
+                <div class='data-container'>
+                    <span class='bold'>Data de emissão: </span>{{ date("d/m/Y") }}
+                </div>
+
                 <div class="header_fixed">
                     <table>
                         <thead>
                             <tr>
                                 <th>Cod</th>
                                 <th id="desc">Descrição</th>
+                                <th>Qtd</th>
                                 <th>Valor</th>
                             </tr>
                         </thead>
@@ -164,28 +166,25 @@
                                 <tr>
                                     <td>{{ $service["id"] }}</td>
                                     <td>{{ $service["description"] }}</td>
-                                    <td>R$ {{ $service["price"] }}</td>
+                                    <td>{{ $service["qtd"] }}</td>
+                                    <td>R$ {{ number_format(($service["price"]  * $service["qtd"] ), 2)}}</td>
                                 </tr>
                             @endforeach
-
-                            @if (isset($totalPrice))
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Total: R$ {{ number_format($totalPrice["total"], 2) }}</td>
-                                </tr>
-                            @endif
                         </tbody>
                     </table>
                 </div>
+
+                @if (isset($totalPrice))
+                    <p>Total: R$ {{ number_format($totalPrice["total"], 2) }}</p>
+                @endif
             <?php endif; ?>
 
-            
+
             @if (isset($notes))
                 <h3>Anotações:</h3>
                 <p>{{ $notes["notes"] }}</p>
             @endif
-            
+
         </div>
 
         <div class="data-footer">

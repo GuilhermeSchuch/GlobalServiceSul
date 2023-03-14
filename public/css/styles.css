@@ -593,7 +593,118 @@ td button {
 
 }
 
+.nf{
+    display: flex;
+    /* border: 1px solid red; */
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nf-item{
+    /* border: 1px solid green; */
+}
+
 .dropdown-item:hover{
   background-color: #4481eb;
   color: #fff;
+}
+
+/* BUDGET */
+.budget-container{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+}
+
+.budget-form{
+    /* border: 1px solid yellowgreen; */
+    display: flex;
+}
+
+.budget-container .form-group{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2em auto;
+    /* border: 1px solid black; */
+}
+
+.budget-container .form-group label{
+    flex: 2 1 1000px;
+}
+
+.budget-container .form-group select{
+    flex: 2;
+    margin-right: 5px;
+}
+
+.budget-container .form-group button{
+    flex: 1;
+}
+
+
+#budget-service{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 560px;
+}
+
+#budget-service p{
+    font-weight: bold;
+}
+
+.services{
+    /* border: 1px solid black; */
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.service-item{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* border: 1px solid blue; */
+}
+
+.check + label {
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: 0.2em;
+  }
+
+.check {
+    display: none;
+  }
+
+.check + label:before {
+    content: "\2714";
+    border: 0.1em solid #000;
+    border-radius: 0.2em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.2em;
+    vertical-align: middle;
+    color: transparent;
+    transition: .2s;
+}
+
+.check + label:active:before {
+    transform: scale(0);
+}
+
+.check:checked + label:before {
+    background-color: #04befe;
+    border-color: #4481eb;
 }

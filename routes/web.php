@@ -25,5 +25,8 @@ Route::delete('/service/{id}', 'App\Http\Controllers\ServiceController@destroy')
 Route::put('/service/{id}', 'App\Http\Controllers\ServiceController@update')->name('service.update');
 Route::post('/service', 'App\Http\Controllers\ServiceController@store')->name('service.post');
 
-// PDF
-Route::get('/{id}/pdf', 'App\Http\Controllers\PdfController@index')->name('pdf');
+// BUDGET-PDF
+Route::get('/budget', 'App\Http\Controllers\BudgetController@index')->name('budget');
+Route::post('/budget', 'App\Http\Controllers\BudgetController@store')->name('budget.post');
+Route::delete('/budget/{id}', 'App\Http\Controllers\BudgetController@destroy')->name('budget.destroy');
+Route::get('/budget/pdf/{id}', 'App\Http\Controllers\PdfController@index')->name('pdf');

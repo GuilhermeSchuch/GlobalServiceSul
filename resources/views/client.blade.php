@@ -71,7 +71,7 @@
                                         </form>
 
                                       </div>
-                        
+
                                     </div>
                                   </div>
                                 </div>
@@ -95,7 +95,7 @@
                                           <form action="{{ route('client.destroy', $clients[$i]["id"]) }}" method="post">
                                             @method('delete')
                                             {{ csrf_field() }}
-                                            
+
                                             <button type="submit" class="btn btn-primary">Apagar</button>
                                           </form>
                                         </div>
