@@ -9,19 +9,7 @@ class PdfController extends Controller
 {
     public function index($id){
         $pdo = \DB::connection()->getPdo();
-        $stmt = $pdo->prepare("SELECT s.id, s.name, s.status, s.description, s.creationDate, s.endingDate, s.id_client, c.firstname, c.lastname, c.address, c.cpf, c.telefone FROM service s JOIN client c ON s.id_client = c.id WHERE s.id = '$id'");
-        $result = $stmt->execute();
-
-        if($stmt->rowCount() > 0){
-            $data = $stmt->fetch();
-        }
-        else{
-            $data = [];
-        }
-
-
-        $pdo = \DB::connection()->getPdo();
-        $stmt = $pdo->prepare("SELECT s.id, s.description, s.price FROM service s JOIN budget_has_service b ON s.id = b.id_service WHERE b.id_budget = 2");
+        $stmt = $pdo->prepare("SELECT s.id, s.name, s.status, s.qtd, s.description, s.price, s.creationDate, s.endingDate FROM service s JOIN budget_has_service b ON b.id_service = s.id WHERE b.id_budget = '$id'");
         $result = $stmt->execute();
 
         if($stmt->rowCount() > 0){
@@ -32,7 +20,30 @@ class PdfController extends Controller
         }
 
         $pdo = \DB::connection()->getPdo();
-        $stmt = $pdo->prepare("SELECT SUM(s.price) as total FROM service s JOIN budget_has_service b ON s.id = b.id_service WHERE b.id_budget = 2");
+        $stmt = $pdo->prepare("SELECT DISTINCT c.id, c.firstname, c.lastname, c.address, c.cpf, c.telefone FROM client c JOIN service s ON c.id = s.id_client JOIN budget_has_service b ON b.id_service = s.id WHERE b.id_budget = '$id'");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $client = $stmt->fetch();
+        }
+        else{
+            $client = [];
+        }
+
+
+        // $pdo = \DB::connection()->getPdo();
+        // $stmt = $pdo->prepare("SELECT s.id, s.description, s.price FROM service s JOIN budget_has_service b ON s.id = b.id_service WHERE b.id_budget = 2");
+        // $result = $stmt->execute();
+
+        // if($stmt->rowCount() > 0){
+        //     $services = $stmt->fetchAll();
+        // }
+        // else{
+        //     $services = [];
+        // }
+
+        $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT SUM(s.price) as total FROM service s JOIN budget_has_service b ON s.id = b.id_service WHERE b.id_budget = '$id'");
         $result = $stmt->execute();
 
         if($stmt->rowCount() > 0){
@@ -43,7 +54,7 @@ class PdfController extends Controller
         }
 
         $pdo = \DB::connection()->getPdo();
-        $stmt = $pdo->prepare("SELECT b.notes FROM budget b WHERE b.id = 2");
+        $stmt = $pdo->prepare("SELECT b.notes FROM budget b WHERE b.id = '$id'");
         $result = $stmt->execute();
 
         if($stmt->rowCount() > 0){
@@ -53,6 +64,6 @@ class PdfController extends Controller
             $notes = [];
         }
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf', ["data"=>$data, "services"=>$services, "totalPrice"=>$totalPrice, "notes"=>$notes])->stream('pdf.pdf');
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf', ["services"=>$services, "client"=>$client, "totalPrice"=>$totalPrice, "notes"=>$notes, "id"=>$id])->stream('pdf.pdf');
     }
 }

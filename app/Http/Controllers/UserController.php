@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function login(Request $request){
         $data = $request;
-    
+
         $email = $data["login_email"];
         $password = $data["login_password"];
 
@@ -24,16 +24,16 @@ class UserController extends Controller
         $stmt = $pdo->prepare("SELECT * FROM user WHERE user.email = '$email'");
         $result = $stmt->execute();
 
+        $userData = [];
+
         if($stmt->rowCount() > 0){
             $userData[] = $stmt->fetch();
         }
 
         if($email === $userData[0]["email"]){
-            if(password_verify($password, $userData[0]["password"])){
+            if($password === $userData[0]["password"]){
 
                 \Session::put('user', [
-                    'name' => $userData[0]["firstname"],
-                    'lastname' => $userData[0]["lastname"],
                     'email' => $userData[0]["email"],
                     'password' => $userData[0]["password"],
                     'token' => $userData[0]["token"]
@@ -48,7 +48,7 @@ class UserController extends Controller
         else{
             return redirect('auth')->with("error", "E-mail e senha não correspondem!");
         }
-        
+
     }
 
     public function register(Request $request){
