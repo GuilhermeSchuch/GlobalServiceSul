@@ -64,6 +64,6 @@ class PdfController extends Controller
             $notes = [];
         }
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf', ["services"=>$services, "client"=>$client, "totalPrice"=>$totalPrice, "notes"=>$notes, "id"=>$id])->stream('pdf.pdf');
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf', ["services"=>$services, "client"=>$client, "totalPrice"=>$totalPrice, "notes"=>$notes, "id"=>$id])->stream('Orçamento Nº.' . $id . '.pdf');
     }
 }

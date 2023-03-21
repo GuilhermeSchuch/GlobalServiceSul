@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 class BudgetController extends Controller
 {
     public function index(){
+        if(!\Session::get('user')){
+            return redirect('auth')->with("error", "Você precisa estar logado!");
+        }
+
         $navbar = "budget";
         $bootstrap = "true";
 

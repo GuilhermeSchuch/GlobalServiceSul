@@ -1,6 +1,11 @@
 <x-header :bootstrap="$bootstrap"/>
 <x-navbar :navbar="$navbar"/>
 
+{{-- @if (session("success"))
+    {{ "oi" }}
+    {{ session("success") }}
+@endif --}}
+
 <div class="client-container">
     <?php if(isset($clients)): ?>
         <div class="header_fixed">

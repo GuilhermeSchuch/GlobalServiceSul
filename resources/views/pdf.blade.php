@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Orçamento</title>
+    <title>Orçamento Nº.{{ $id }}</title>
 </head>
 
 <style>
@@ -25,6 +25,7 @@
         /* border: 1px solid blue; */
         display: flex;
         flex-direction: row;
+        margin-top: 30px;
     }
 
     .logo h1{
@@ -68,6 +69,7 @@
         overflow: auto;
         border: 1px solid #dddddd;
         text-align: center;
+        margin-top: 50px;
     }
 
     .header_fixed thead th {
@@ -98,6 +100,10 @@
 
     #desc{
         min-width: 450px;
+    }
+
+    h3{
+        margin-top: 70px;
     }
 
 </style>
@@ -141,6 +147,7 @@
                         echo "<span class='bold'>CPF/CNPJ: </span>"; echo $client["cpf"];
                     echo "</div class='data-container'>";
 
+                    $totalQtd = 0;
                 }
 
             ?>
@@ -167,15 +174,24 @@
                                     <td>{{ $service["id"] }}</td>
                                     <td>{{ $service["description"] }}</td>
                                     <td>{{ $service["qtd"] }}</td>
+
+
+                                    <?php $totalQtd += ($service["price"]  * $service["qtd"]) ?>
+
+
                                     <td>R$ {{ number_format(($service["price"]  * $service["qtd"] ), 2)}}</td>
                                 </tr>
+
+
                             @endforeach
                         </tbody>
+
+
                     </table>
                 </div>
 
-                @if (isset($totalPrice))
-                    <p>Total: R$ {{ number_format($totalPrice["total"], 2) }}</p>
+                @if (isset($totalQtd))
+                    <p>Total: R$ {{ number_format(($totalQtd), 2) }}</p>
                 @endif
             <?php endif; ?>
 

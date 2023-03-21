@@ -77,28 +77,28 @@
                                                 <form action="{{ route('service.update', $services[$i]["id"]) }}" method="POST" id="edit-form">
                                                     @method('put')
                                                     {{ csrf_field() }}
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="name" class="col-form-label">Nome:</label>
                                                         <input type="text" class="form-control" id="name" name="name" value="{{ $services[$i]["name"] }}">
                                                     </div>
 
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="description" class="col-form-label">Descrição:</label>
                                                         {{-- <input type="text" class="form-control" id="description" name="description" value="{{ $services[$i]["description"] }}"> --}}
                                                         <textarea class="form-control" id="description" name="description">{{ $services[$i]["description"] }}</textarea>
                                                     </div>
 
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="price" class="col-form-label" >Preço:</label>
                                                         <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Insira o preço" value="{{ $services[$i]["price"] }}">
                                                     </div>
 
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="qtd" class="col-form-label" >Quantidade:</label>
                                                         <input type="number" class="form-control" id="qtd" name="qtd" placeholder="Insira a quantidade" value="{{ $services[$i]["qtd"] }}">
                                                     </div>
 
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="status" class="col-form-label">Status:</label>
                                                         <select class="form-control" id="status" name="status">
                                                             <?php if(isset($status)): ?>
@@ -120,19 +120,19 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="creationDate" class="col-form-label">Data de criação:</label>
                                                         <input type="text" class="form-control" id="creationDate" name="creationDate" value="{{ date('d/m/Y',  strtotime($services[$i]["creationDate"])) }}" disabled>
                                                     </div>
 
                                                     @if ($services[$i]["status"] == 2)
-                                                        <div class="form-group" style="min-width: 230px">
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                             <label for="endingDate" class="col-form-label">Data serviço finalizado:</label>
                                                             <input type="date" class="form-control" id="endingDate" name="endingDate" value="{{ $services[$i]["endingDate"] }}" disabled>
                                                         </div>
                                                     @endif
 
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="client" class="col-form-label">Cliente:</label>
                                                         {{-- <input type="text" class="form-control" id="client" name="client" value="{{ $services[$i]["firstname"] . ' ' . $services[$i]["lastname"] }}" disabled> --}}
                                                         <select class="form-control" id="client" name="client">
@@ -155,7 +155,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="form-group" style="min-width: 230px">
+                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
                                                         <label for="identifier" class="col-form-label">Identificador:</label>
                                                         <input type="text" class="form-control" id="identifier" name="identifier" value="{{ $services[$i]["id"] }}" disabled>
                                                     </div>
@@ -181,7 +181,7 @@
                                                                                 var editForm = document.querySelector('#edit-form');
 
                                                                                 deleteForm.addEventListener('submit', function(event) {
-                                                                                    event.preventDefault();
+                                                                                    // event.preventDefault();
                                                                                     preventEditFormSubmit();
                                                                                 });
 
@@ -195,7 +195,16 @@
 
                                                                             const handleEdit = () => {
                                                                                 var deleteForm = document.querySelector('#delete-form');
-                                                                                deleteForm.innerHTML = null;
+                                                                                var editForm = document.querySelector('#edit-form');
+
+                                                                                editForm.addEventListener('submit', function(event) {
+                                                                                    // event.preventDefault();
+                                                                                    preventRemoveFormSubmit();
+                                                                                });
+
+                                                                                function preventRemoveFormSubmit() {
+
+                                                                                }
                                                                             }
                                                                         </script>
 
@@ -233,7 +242,7 @@
 
                                                     <div class="modal-footer" style="min-width: 230px">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                        <button type="submit" class="btn btn-primary" onclick="handleEdit()">Salvar1</button>
+                                                        <button type="submit" class="btn btn-primary" onclick="handleEdit()">Salvar</button>
                                                     </div>
                                                 </form>
 

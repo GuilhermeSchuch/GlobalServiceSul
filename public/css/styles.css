@@ -4,17 +4,48 @@
   --main-bg-color: #3391f0;
 }
 
+/* ALERTS */
+.msg-container{
+    position: relative;
+    opacity: 1;
+}
+
+
+.alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1vh 35vw;
+    text-align: center;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    border-radius: 0.25rem;
+    width: 30vw;
+    z-index: 99;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
 /* NAVBAR */
 nav{
-  display: flex;
+  /* display: flex;
   height: 80px;
   width: 100%;
-  background: var(--main-bg-color);
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap; */
+  background: var(--main-bg-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 50px 0 100px;
-  flex-wrap: wrap;
 }
+
 nav .logo{
   font-size: 35px;
   font-weight: 600;
@@ -40,89 +71,116 @@ nav ul{
   align-items: center;
   list-style: none;
   /* border: 1px solid green; */
+  /* height: 360px; */
+  gap: 3px;
+  margin-top: 13px;
 }
+
 nav ul li{
-  margin: 0 5px;
-  min-height: 100%;
+  /* margin: 0 5px;
+  min-height: 100%; */
   /* border: 1px solid rgb(38, 0, 255); */
 }
+
 nav ul li a{
   color: #f2f2f2;
   text-decoration: none;
   font-size: 18px;
+  border-radius: 5px;
+transition: all 0.3s ease;
+  color: #fff;
   font-weight: 500;
   padding: 8px 15px;
-  border-radius: 5px;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
 }
+
 nav ul li a.active,
 nav ul li a:hover
 {
   color: #fff;
   background: #000;
-}
-nav .menu-btn i{
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
-  display: none;
-}
-input[type="checkbox"]{
-  display: none;
-}
-@media (max-width: 1000px){
-  nav{
-    padding: 0 40px 0 50px;
-  }
-}
-@media (max-width: 920px) {
-  nav .menu-btn i{
-    display: block;
-  }
-  #click:checked ~ .menu-btn i:before{
-    content: "\f00d";
-  }
-  nav ul{
-    position: fixed;
-    top: 80px;
-    left: -100%;
-    background: #111;
-    height: 100vh;
-    width: 100%;
-    text-align: center;
-    display: block;
-    transition: all 0.3s ease;
-    z-index: 98;
-  }
-  #click:checked ~ ul{
-    left: 0;
-  }
-  nav ul li{
-    width: 100%;
-    margin: 40px 0;
-  }
-  nav ul li a{
-    width: 100%;
-    margin-left: -100%;
-    display: block;
-    font-size: 20px;
-    transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-  #click:checked ~ ul li a{
-    margin-left: 0px;
-  }
-  nav ul li a.active,
-  nav ul li a:hover{
-    background: none;
-    color: cyan;
-  }
+  text-decoration: none;
 }
 
 .search-form{
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
+  margin: 0;
+  padding: 0;
 }
+
+@media (max-width: 1050px) {
+    nav{
+        /* background-color: red; */
+    }
+
+    nav .logo{
+        font-size: 25px;
+        font-weight: 600;
+        /* border: 1px solid black; */
+    }
+
+    nav ul li a{
+        color: #f2f2f2;
+        text-decoration: none;
+        font-size: 13px;
+        border-radius: 5px;
+      transition: all 0.3s ease;
+        color: #fff;
+        font-weight: 500;
+        padding: 4px 7px;
+        letter-spacing: 1px;
+      }
+
+      .search-form{
+        width: 180px;
+        font-size: 13px;
+      }
+}
+
+
+@media (max-width: 790px) {
+    nav{
+        /* background-color: yellow; */
+        padding: 0 50px 0 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav .logo{
+        font-size: 25px;
+        font-weight: 600;
+        /* border: 1px solid black; */
+    }
+
+    .logo a{
+        display: none;
+      }
+
+    nav ul li a{
+        color: #f2f2f2;
+        text-decoration: none;
+        font-size: 13px;
+        border-radius: 5px;
+      transition: all 0.3s ease;
+        color: #fff;
+        font-weight: 500;
+        padding: 4px 7px;
+        letter-spacing: 1px;
+      }
+
+      .search-form{
+
+        width: 90px;
+        font-size: 13px;
+      }
+
+      nav ul li{
+        flex-wrap: nowrap;
+      }
+}
+
 
 
 /* BASIC */
@@ -611,7 +669,7 @@ td button {
 
 /* BUDGET */
 .budget-container{
-    /* border: 1px solid red; */
+    border: 1px solid red;
     display: flex;
     flex-direction: column;
 }
@@ -619,6 +677,10 @@ td button {
 .budget-form{
     /* border: 1px solid yellowgreen; */
     display: flex;
+}
+
+.button{
+    border: 1px solid green;
 }
 
 .budget-container .form-group{

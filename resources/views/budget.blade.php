@@ -57,10 +57,11 @@
             <button type="submit" class="btn btn-primary">Escolher</button>
         </div>
     </form>
+
+<div class="button">
+  <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newService" data-whatever="newService">Criar novo orçamento</button>
 </div>
 
-
-<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newService" data-whatever="newService">Criar novo orçamento</button>
 <div class="modal fade" id="newService" tabindex="-1" role="dialog" aria-labelledby="newServiceLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -101,5 +102,11 @@
     </div>
   </div>
 </div>
+
+
+</div>
+
+
+
 
 <x-footer />

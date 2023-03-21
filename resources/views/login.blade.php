@@ -1,12 +1,17 @@
 <x-header :bootstrap="$bootstrap"/>
 
     @if (Session::get('error'))
-        <div class="alert alert-danger msg">{{ Session::get('error') }}</div>
+        {{-- <div class="alert alert-danger msg"></div> --}}
+
+
+        <div class="alert-container msg-container">
+            <div class="alert alert-danger msg" role="alert">
+                {{ Session::get('error') }}
+            </div>
+        </div>
     @endif
 
-    @if (isset($userData))
-        <?php print_r($userData); ?>
-    @endif
+
 
     <div class="container">
       <div class="forms-container">

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     public function index(Request $request){
+        if(!\Session::get('user')){
+            return redirect('auth')->with("error", "Você precisa estar logado!");
+        }
+
         $navbar = "service";
         $bootstrap = "true";
 

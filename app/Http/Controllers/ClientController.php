@@ -33,7 +33,7 @@ class ClientController extends Controller
             $pdo = \DB::connection()->getPdo();
             $stmt = $pdo->prepare("SELECT * FROM client WHERE client.firstname LIKE " . '"%' . $query . '%"' . "OR client.lastname LIKE" . '"%' . $query . '%"');
             $result = $stmt->execute();
-    
+
             if($stmt->rowCount() > 0){
                 $clients = $stmt->fetchAll();
             }
@@ -42,6 +42,7 @@ class ClientController extends Controller
             }
         }
 
+        session()->flash("success", "bomdia");
         return view('client', ["navbar"=>$navbar, "clients"=>$clients, "bootstrap"=>$bootstrap, "query"=>$query]);
     }
 
@@ -70,13 +71,13 @@ class ClientController extends Controller
 
         $pdo = \DB::connection()->getPdo();
 
-        $stmt = $pdo->prepare("UPDATE `client` SET 
-        `firstname` = '$firstname', 
-        `lastname` = '$lastname', 
-        `complement` = '$complement', 
-        `cpf` = '$cpf', 
-        `address` = '$address', 
-        `telefone` = '$telefone' 
+        $stmt = $pdo->prepare("UPDATE `client` SET
+        `firstname` = '$firstname',
+        `lastname` = '$lastname',
+        `complement` = '$complement',
+        `cpf` = '$cpf',
+        `address` = '$address',
+        `telefone` = '$telefone'
         WHERE `client`.`id` = '$id'");
 
         $result = $stmt->execute();
