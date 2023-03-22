@@ -31,8 +31,8 @@
 
 <div class="budget-container">
     <form action="" class="budget-form">
-        <div class="form-group" style="min-width: 230px;">
-            <label for="client" class="col-form-label">Escolha o cliente:</label>
+        <div class="form-group" style="min-width: 230px;" id="clients">
+            <label for="client" class="col-form-label non-changeable">Escolha o cliente:</label>
 
             <select class="form-control" id="client" name="client">
                 <?php echo "<option value=''>"; ?>
@@ -55,12 +55,35 @@
             </select>
 
             <button type="submit" class="btn btn-primary">Escolher</button>
+
+            @if (isset($clients))
+                @foreach ($clients as $client)
+                    @if ($qclient == $client["id"])
+                        <label class="chosen-client non-changeable">{{ $client["firstname"] }} {{ $client["lastname"] }} selecionado</label>
+                    @endif
+                @endforeach
+            @endif
+
         </div>
+
+        <div class="button">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newService" data-whatever="newService">Criar novo orçamento</button>
+        </div>
+
+        <script>
+            let formGroup = document.querySelector(".budget-container .form-group");
+            let $button = document.querySelector(".button");
+
+            let width = formGroup.clientWidth;
+
+            $button.style.width = width + 'px';
+
+            console.log(formGroup.clientWidth);
+        </script>
+
     </form>
 
-<div class="button">
-  <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newService" data-whatever="newService">Criar novo orçamento</button>
-</div>
+
 
 <div class="modal fade" id="newService" tabindex="-1" role="dialog" aria-labelledby="newServiceLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -77,7 +100,7 @@
           {{ csrf_field() }}
 
             <div class="form-group service-item">
-                <label class="col-form-label">Serviços:</label>
+                <p class="col-form-label">Serviços:</p>
 
                 @foreach ($services  as $service)
                     <input type="checkbox" class="check" id={{ $service["id"] }} name="serviceList[]" value="{{ $service["id"] }}">
@@ -85,7 +108,7 @@
                 @endforeach
             </div>
 
-          <div class="form-group" style="min-width: 230px">
+          <div class="form-group" style="min-width: 230px;">
             <label for="description" class="col-form-label" >Anotação:</label>
             <textarea class="form-control" id="description" name="notes" placeholder="Insira uma anotação"></textarea>
           </div>

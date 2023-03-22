@@ -669,10 +669,11 @@ td button {
 
 /* BUDGET */
 .budget-container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
 }
+
 
 .budget-form{
     /* border: 1px solid yellowgreen; */
@@ -680,7 +681,8 @@ td button {
 }
 
 .button{
-    border: 1px solid green;
+    /* border: 1px solid green; */
+    width: 2510px;
 }
 
 .budget-container .form-group{
@@ -690,7 +692,7 @@ td button {
     /* border: 1px solid black; */
 }
 
-.budget-container .form-group label{
+.non-changeable{
     flex: 2 1 1000px;
 }
 
@@ -701,6 +703,11 @@ td button {
 
 .budget-container .form-group button{
     flex: 1;
+}
+
+.chosen-client{
+    /* color: red; */
+    padding-top: 5px;
 }
 
 
