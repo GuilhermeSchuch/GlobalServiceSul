@@ -1,3 +1,21 @@
+    <footer>
+        {{-- <a href="https://wa.link/yg7mu4"> --}}
+            <div class="social-links" onclick="handleWhats()">
+                <div id="whats" class="social-btn flex-center">
+                    <img src="{{ url('img/whats.svg') }}" alt=""><span>Suporte</span>
+                </div>
+            </div>
+        {{-- </a> --}}
+    </footer>
+
+
+    <script>
+        const handleWhats = () => {
+            window.location.href = "https://wa.link/yg7mu4";
+        }
+    </script>
+
+
     {{-- JQUERY --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
