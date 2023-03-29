@@ -92,6 +92,17 @@ class ServiceController extends Controller
         }
 
         $pdo = \DB::connection()->getPdo();
+        $stmt = $pdo->prepare("SELECT DISTINCT * FROM budget_has_service");
+        $result = $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $budget = $stmt->fetchAll();
+        }
+        else{
+            $budget = [];
+        }
+
+        $pdo = \DB::connection()->getPdo();
         $stmt = $pdo->prepare("SELECT * FROM service_status");
         $result = $stmt->execute();
 
@@ -128,7 +139,7 @@ class ServiceController extends Controller
             }
         }
 
-        return view("service", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "services"=>$services, "clients"=>$clients, "status"=>$status]);
+        return view("service", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "services"=>$services, "clients"=>$clients, "status"=>$status, "budget"=>$budget]);
     }
 
     public function showDone(){

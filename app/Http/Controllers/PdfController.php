@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
+// use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 
 class PdfController extends Controller
 {
@@ -64,6 +65,12 @@ class PdfController extends Controller
             $notes = [];
         }
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf', ["services"=>$services, "client"=>$client, "totalPrice"=>$totalPrice, "notes"=>$notes, "id"=>$id])->stream('Orçamento Nº.' . $id . '.pdf');
+
+        // return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf', ["services"=>$services, "client"=>$client, "totalPrice"=>$totalPrice, "notes"=>$notes, "id"=>$id])->download('Orçamento Nº.' . $id . '.pdf');
+
+
+        $pdf = PDF::loadView("pdf", ["services"=>$services, "client"=>$client, "totalPrice"=>$totalPrice, "notes"=>$notes, "id"=>$id]);
+        $pdf->useSubstitutions = true;
+        return $pdf->stream("Orçamento Nº." . "$id" . ".pdf", ["services"=>$services, "client"=>$client, "totalPrice"=>$totalPrice, "notes"=>$notes, "id"=>$id]);
     }
 }

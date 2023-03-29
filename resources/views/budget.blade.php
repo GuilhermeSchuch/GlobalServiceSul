@@ -30,7 +30,7 @@
 </div> --}}
 
 <div class="budget-container">
-    <form action="" class="budget-form">
+    <form action="" class="budget-form auth-form">
         <div class="form-group" style="min-width: 230px;" id="clients">
             <label for="client" class="col-form-label non-changeable">Escolha o cliente:</label>
 
@@ -96,7 +96,7 @@
       </div>
       <div class="modal-body">
 
-        <form action="{{ route('budget.post') }}" method="POST">
+        <form action="{{ route('budget.post') }}" method="POST" class="auth-form">
           {{ csrf_field() }}
 
             <div class="form-group service-item">

@@ -3,10 +3,6 @@
 
 <div class="home-container">
     <img src="img/logo.png" alt="">
-
-    <?php
-        if(isset($list)){
-            print_r($list);
-        }
-    ?>
 </div>
+
+<h1 style="color: red">GERAÇÃO PDF JÁ FUNCIONANDO, ARRUMANDO ESTILIZAÇÃO</h1>

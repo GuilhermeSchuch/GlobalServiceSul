@@ -16,7 +16,7 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="{{ route('login') }}" class="sign-in-form" method="POST">
+          <form action="{{ route('login') }}" class="sign-in-form auth-form" method="POST">
             {{ csrf_field() }}
             <h2 class="title">Login</h2>
             <div class="input-field">
@@ -29,7 +29,7 @@
             </div>
             <input type="submit" value="Login" class="btn-auth solid" />
           </form>
-          <form action="{{ route('register') }}" class="sign-up-form" method="POST">
+          <form action="{{ route('register') }}" class="sign-up-form auth-form" method="POST">
             {{ csrf_field() }}
             <h2 class="title">Cadastrar</h2>
 
