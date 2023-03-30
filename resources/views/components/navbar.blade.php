@@ -12,8 +12,10 @@
             <form action="" method="GET" id="search-form" class="search-form">
                 @if ($navbar === "service")
                     @if (request()["query"])
-                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo idr" value="{{ request()['query'] }}">
-                        <a href="{{ route('service') }}">Limpar</a>
+                        <div class="clean-search">
+                            <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo idr" value="{{ request()['query'] }}">
+                            <a href="{{ route('service') }}">Limpar</a>
+                        </div>
                     @else
                         <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo id">
                     @endif
@@ -21,8 +23,10 @@
 
                 @if ($navbar === "client")
                     @if (request()["query"])
-                        <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo nome" value="{{ request()['query'] }}">
-                        <a href="{{ route('client') }}">Limpar</a>
+                        <div class="clean-search">
+                            <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo nome" value="{{ request()['query'] }}">
+                            <a href="{{ route('client') }}">Limpar</a>
+                        </div>
                     @else
                         <input type="text" name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Pesquise pelo nome">
                     @endif

@@ -77,7 +77,7 @@ class BudgetController extends Controller
             $result = $stmt->execute();
         }
 
-        return view("home", ["navbar"=>$navbar, "bootstrap"=>$bootstrap, "list"=>$list]);
+        return redirect("service");
     }
 
     public function destroy($id){

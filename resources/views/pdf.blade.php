@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Orçamento Nº.{{ $id }}</title>
+
 </head>
 
 <style>
+
+
     body{
-        font-family: "Poppins", sans-serif;
+        font-family: "roboto", sans-serif;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -41,12 +44,19 @@
     .bold{
         font-weight: bold;
         margin-bottom: 10px;
+        /* border: 1px solid red; */
     }
 
     .data-container{
         margin-bottom: 10px;
+        /* border: 1px solid #f00; */
+        /* padding: 3px; */
+        /* display: flex;
+        flex-direction: column; */
+    }
+
+    .data-item{
         border: 1px solid #000;
-        padding: 3px;
     }
 
     .address{
@@ -67,7 +77,7 @@
         max-height: 100vh;
         width: 100%;
         overflow: auto;
-        border: 1px solid #dddddd;
+        /* border: 1px solid #dddddd; */
         text-align: center;
         margin-top: 50px;
     }
@@ -83,7 +93,7 @@
 
     th,
     td {
-        border-bottom: 1px solid #dddddd;
+        /* border-bottom: 1px solid #dddddd; */
         padding: 10px 15px;
         font-size: 13.9px;
         text-align: center;
@@ -109,6 +119,7 @@
 </style>
 
 <body>
+
     <div class="pdf-container">
 
         <div class="logo">
@@ -132,20 +143,24 @@
 
                 if(isset($client)){
                     echo "<div class='data-container'>";
-                        echo "<span class='bold'>Razão Social / Nome: </span>"; echo $client["firstname"] . ' ' . $client["lastname"];
+
+                        echo "<p class='data-item'>";
+                            echo "<span class='bold'>Razão Social / Nome: </span>" . $client["firstname"] . ' ' . $client["lastname"];
+                        echo "</p>";
+
+                        echo "<p class='data-item'>";
+                            echo "<span class='bold'>Endereço: </span>" . $client["address"];
+                        echo "</p>";
+
+                        echo "<p class='data-item'>";
+                            echo "<span class='bold'>Tel: </span>" . $client["telefone"];
+                        echo "</p>";
+
+                        echo "<p class='data-item'>";
+                            echo "<span class='bold'>CPF/CNPJ: </span>" . $client["cpf"];
+                        echo "</p>";
+
                     echo "</div>";
-
-                    echo "<div class='data-container'>";
-                        echo "<span class='bold'>Endereço: </span>"; echo $client["address"];
-                    echo "</div class='data-container'>";
-
-                    echo "<div class='data-container'>";
-                        echo "<span class='bold'>Tel: </span>"; echo $client["telefone"];
-                    echo "</div class='data-container'>";
-
-                    echo "<div class='data-container'>";
-                        echo "<span class='bold'>CPF/CNPJ: </span>"; echo $client["cpf"];
-                    echo "</div class='data-container'>";
 
                     $totalQtd = 0;
                 }
@@ -162,7 +177,7 @@
                         <thead>
                             <tr>
                                 <th>Cod</th>
-                                <th id="desc">Descrição</th>
+                                <th id="desc">Descricao</th>
                                 <th>Qtd</th>
                                 <th>Valor</th>
                             </tr>
@@ -191,13 +206,13 @@
                 </div>
 
                 @if (isset($totalQtd))
-                    <p>Total: R$ {{ number_format(($totalQtd), 2) }}</p>
+                    <p><span class="bold">Total: </span>R$ {{ number_format(($totalQtd), 2) }}</p>
                 @endif
             <?php endif; ?>
 
 
             @if (isset($notes))
-                <h3>Anotações:</h3>
+                <h3>Anotacoes:</h3>
                 <p>{{ $notes["notes"] }}</p>
             @endif
 
@@ -207,5 +222,6 @@
             <h3>Assinatura do emitente: _______________________________</h3>
         </div>
     </div>
+
 </body>
 </html>

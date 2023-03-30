@@ -36,7 +36,7 @@
                                       </div>
                                       <div class="modal-body">
 
-                                        <form action="{{ route('client.update', $clients[$i]["id"]) }}" method="POST">
+                                        <form action="{{ route('client.update', $clients[$i]["id"]) }}" method="POST" class="auth-form">
                                           @method('put')
                                           {{ csrf_field() }}
                                           <div class="form-group">
@@ -128,7 +128,7 @@
       </div>
       <div class="modal-body">
 
-        <form action="{{ route('client.post') }}" method="POST">
+        <form action="{{ route('client.post') }}" method="POST" class="auth-form">
           {{ csrf_field() }}
           <div class="form-group">
             <label for="firstname" class="col-form-label">Nome:</label>

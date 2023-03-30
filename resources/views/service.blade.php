@@ -60,193 +60,213 @@
                                     <td>{{ $services[$i]["firstname"] . ' ' . $services[$i]["lastname"]}}</td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary delete-modal" data-toggle="modal" data-target="#exampleModal{{ $services[$i]["id"] }}" data-whatever="@mdo{{ $services[$i]["id"] }}">Ver mais</button>
+                                        <button type="button" class="btn btn-primary delete-modal" data-toggle="modal" data-target="#exampleModal{{ $services[$i]["id"] }}" data-whatever="@mdo{{ $services[$i]["id"] }}" onclick="handleNf()">Ver mais</button>
                                         <div class="modal fade delete-modal" id="exampleModal{{ $services[$i]["id"] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ $services[$i]["id"] }}" aria-hidden="true">
 
 
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                            <div class="modal-header" style="color: #000">
-                                                <h5 class="modal-title" id="exampleModalLabel{{ $services[$i]["id"] }}">{{ $services[$i]["name"] }}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body" style="color: #000">
+                                                <div class="modal-header" style="color: #000">
+                                                    <h5 class="modal-title" id="exampleModalLabel{{ $services[$i]["id"] }}">{{ $services[$i]["name"] }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
 
-                                                <form action="{{ route('service.update', $services[$i]["id"]) }}" method="POST" id="edit-form">
-                                                    @method('put')
-                                                    {{ csrf_field() }}
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="name" class="col-form-label">Nome:</label>
-                                                        <input type="text" class="form-control" id="name" name="name" value="{{ $services[$i]["name"] }}">
-                                                    </div>
+                                                <div class="modal-body" style="color: #000">
 
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="description" class="col-form-label">Descrição:</label>
-                                                        {{-- <input type="text" class="form-control" id="description" name="description" value="{{ $services[$i]["description"] }}"> --}}
-                                                        <textarea class="form-control" id="description" name="description">{{ $services[$i]["description"] }}</textarea>
-                                                    </div>
-
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="price" class="col-form-label" >Preço:</label>
-                                                        <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Insira o preço" value="{{ $services[$i]["price"] }}">
-                                                    </div>
-
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="qtd" class="col-form-label" >Quantidade:</label>
-                                                        <input type="number" class="form-control" id="qtd" name="qtd" placeholder="Insira a quantidade" value="{{ $services[$i]["qtd"] }}">
-                                                    </div>
-
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="status" class="col-form-label">Status:</label>
-                                                        <select class="form-control" id="status" name="status">
-                                                            <?php if(isset($status)): ?>
-                                                                <?php
-                                                                    foreach ($status as $stats) {
-                                                                        if($services[$i]["status"] == $stats["id"]){
-                                                                            echo "<option value='" . $stats["id"] . "' selected>";
-                                                                                echo $stats["status"];
-                                                                            echo "</option>";
-                                                                        }
-                                                                        else{
-                                                                            echo "<option value='" . $stats["id"] . "'>";
-                                                                                echo $stats["status"];
-                                                                            echo "</option>";
-                                                                        }
-                                                                    }
-                                                                ?>
-                                                        <?php endif; ?>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="creationDate" class="col-form-label">Data de criação:</label>
-                                                        <input type="text" class="form-control" id="creationDate" name="creationDate" value="{{ date('d/m/Y',  strtotime($services[$i]["creationDate"])) }}" disabled>
-                                                    </div>
-
-                                                    @if ($services[$i]["status"] == 2)
+                                                    <form action="{{ route('service.update', $services[$i]["id"]) }}" method="POST" id="edit-form" class="auth-form">
+                                                        @method('put')
+                                                        {{ csrf_field() }}
                                                         <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                            <label for="endingDate" class="col-form-label">Data serviço finalizado:</label>
-                                                            <input type="date" class="form-control" id="endingDate" name="endingDate" value="{{ $services[$i]["endingDate"] }}" disabled>
+                                                            <label for="name" class="col-form-label">Nome:</label>
+                                                            <input type="text" class="form-control" id="name" name="name" value="{{ $services[$i]["name"] }}">
                                                         </div>
-                                                    @endif
 
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="client" class="col-form-label">Cliente:</label>
-                                                        {{-- <input type="text" class="form-control" id="client" name="client" value="{{ $services[$i]["firstname"] . ' ' . $services[$i]["lastname"] }}" disabled> --}}
-                                                        <select class="form-control" id="client" name="client">
-                                                            <?php if(isset($clients)): ?>
-                                                                <?php
-                                                                    foreach ($clients as $client) {
-                                                                        if($services[$i]["id_client"] == $client["id"]){
-                                                                            echo "<option value='" . $client["id"] . "' selected>";
-                                                                                echo $client["firstname"] . ' ' .  $client["lastname"];
-                                                                            echo "</option>";
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                            <label for="description" class="col-form-label">Descrição:</label>
+                                                            {{-- <input type="text" class="form-control" id="description" name="description" value="{{ $services[$i]["description"] }}"> --}}
+                                                            <textarea class="form-control" id="description" name="description">{{ $services[$i]["description"] }}</textarea>
+                                                        </div>
+
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                            <label for="price" class="col-form-label" >Preço:</label>
+                                                            <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Insira o preço" value="{{ $services[$i]["price"] }}">
+                                                        </div>
+
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                            <label for="qtd" class="col-form-label" >Quantidade:</label>
+                                                            <input type="number" class="form-control" id="qtd" name="qtd" placeholder="Insira a quantidade" value="{{ $services[$i]["qtd"] }}">
+                                                        </div>
+
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                            <label for="status" class="col-form-label">Status:</label>
+                                                            <select class="form-control" id="status" name="status">
+                                                                <?php if(isset($status)): ?>
+                                                                    <?php
+                                                                        foreach ($status as $stats) {
+                                                                            if($services[$i]["status"] == $stats["id"]){
+                                                                                echo "<option value='" . $stats["id"] . "' selected>";
+                                                                                    echo $stats["status"];
+                                                                                echo "</option>";
+                                                                            }
+                                                                            else{
+                                                                                echo "<option value='" . $stats["id"] . "'>";
+                                                                                    echo $stats["status"];
+                                                                                echo "</option>";
+                                                                            }
                                                                         }
-                                                                        else{
-                                                                            echo "<option value='" . $client["id"] . "'>";
-                                                                                echo $client["firstname"] . ' ' .  $client["lastname"];
-                                                                            echo "</option>";
-                                                                        }
-                                                                    }
-                                                                ?>
+                                                                    ?>
                                                             <?php endif; ?>
-                                                        </select>
-                                                    </div>
+                                                            </select>
+                                                        </div>
 
-                                                    <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
-                                                        <label for="identifier" class="col-form-label">Identificador:</label>
-                                                        <input type="text" class="form-control" id="identifier" name="identifier" value="{{ $services[$i]["id"] }}" disabled>
-                                                    </div>
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                            <label for="creationDate" class="col-form-label">Data de criação:</label>
+                                                            <input type="text" class="form-control" id="creationDate" name="creationDate" value="{{ date('d/m/Y',  strtotime($services[$i]["creationDate"])) }}" disabled>
+                                                        </div>
 
-                                                    @foreach ($budget as $nf)
-                                                        @if ($nf["id_service"] == $services[$i]['id'])
-                                                            <div class="form-group nf" style="min-width: 230px">
-                                                                <div class="nf-item">
-                                                                    <a href="{{ route('pdf', $nf["id_budget"]) }}" target="_blank" style="margin-right: 5px">Ver nota {{ $nf["id_budget"] }}</a>
-                                                                </div>
-
-                                                                <div class="nf-item">
-                                                                    <form action=""></form>
-                                                                    <form id="delete-form" action="{{ route('budget.destroy', $nf["id_budget"]) }}" method="post" style="padding:  0;" onclick="handleDelete()">
-                                                                        @method('delete')
-                                                                        {{ csrf_field() }}
-
-                                                                        <button type="submit" class="btn btn-primary" style="background-color: transparent; border: 0; padding: 0;"><img src="{{ url('img/flaticon/trash.png') }}" alt="Del" width="15px"></button>
-
-                                                                        <script>
-                                                                            const handleDelete = (e) => {
-                                                                                var deleteForm = document.querySelector('#delete-form');
-                                                                                var editForm = document.querySelector('#edit-form');
-
-                                                                                deleteForm.addEventListener('submit', function(event) {
-                                                                                    // event.preventDefault();
-                                                                                    preventEditFormSubmit();
-                                                                                });
-
-                                                                                function preventEditFormSubmit() {
-                                                                                    editForm.addEventListener('submit', function(event) {
-                                                                                        event.preventDefault();
-                                                                                    });
-                                                                                }
-                                                                            }
-
-
-                                                                            const handleEdit = () => {
-                                                                                var deleteForm = document.querySelector('#delete-form');
-                                                                                var editForm = document.querySelector('#edit-form');
-
-                                                                                editForm.addEventListener('submit', function(event) {
-                                                                                    // event.preventDefault();
-                                                                                    preventRemoveFormSubmit();
-                                                                                });
-
-                                                                                function preventRemoveFormSubmit() {
-
-                                                                                }
-                                                                            }
-                                                                        </script>
-
-                                                                    </form>
-                                                                </div>
+                                                        @if ($services[$i]["status"] == 2)
+                                                            <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                                <label for="endingDate" class="col-form-label">Data serviço finalizado:</label>
+                                                                <input type="date" class="form-control" id="endingDate" name="endingDate" value="{{ $services[$i]["endingDate"] }}" disabled>
                                                             </div>
                                                         @endif
 
-                                                    @endforeach
-                                                    {{-- @foreach ($budget as $nf)
-                                                        @if ($nf["id_service"] == $services[$i]['id'])
-                                                            <div class="form-group nf" style="min-width: 230px">
-                                                                <div class="nf-item">
-                                                                    <a href="{{ route('pdf', $nf["id_budget"]) }}" target="_blank" style="margin-right: 5px">Ver nota {{ $nf["id_budget"] }}</a>
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                            <label for="client" class="col-form-label">Cliente:</label>
+                                                            {{-- <input type="text" class="form-control" id="client" name="client" value="{{ $services[$i]["firstname"] . ' ' . $services[$i]["lastname"] }}" disabled> --}}
+                                                            <select class="form-control" id="client" name="client">
+                                                                <?php if(isset($clients)): ?>
+                                                                    <?php
+                                                                        foreach ($clients as $client) {
+                                                                            if($services[$i]["id_client"] == $client["id"]){
+                                                                                echo "<option value='" . $client["id"] . "' selected>";
+                                                                                    echo $client["firstname"] . ' ' .  $client["lastname"];
+                                                                                echo "</option>";
+                                                                            }
+                                                                            else{
+                                                                                echo "<option value='" . $client["id"] . "'>";
+                                                                                    echo $client["firstname"] . ' ' .  $client["lastname"];
+                                                                                echo "</option>";
+                                                                            }
+                                                                        }
+                                                                    ?>
+                                                                <?php endif; ?>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group" style="min-width: 230px; color: #000; text-align: left">
+                                                            <label for="identifier" class="col-form-label">Identificador:</label>
+                                                            <input type="text" class="form-control" id="identifier" name="identifier" value="{{ $services[$i]["id"] }}" disabled>
+                                                        </div>
+
+
+                                                        <div class="form-group form-group-nf-container">
+                                                            @if (isset($budget))
+                                                                @foreach ($budget as $nf)
+                                                                    @if ($nf["id_service"] == $services[$i]['id'])
+                                                                        <div class="form-group nf" style="min-width: 230px">
+                                                                            <div class="nf-item">
+                                                                                <a href="{{ route('pdf', $nf["id_budget"]) }}" target="_blank" style="margin-right: 5px">Ver nota {{ $nf["id_budget"] }}</a>
+                                                                            </div>
+
+                                                                            <div class="nf-item">
+                                                                                <form action=""></form>
+                                                                                <form class="delete-form" action="{{ route('budget.destroy', $nf["id_budget"]) }}" method="post" style="padding: 0;" onclick="handleDelete()">
+                                                                                    @method('delete')
+                                                                                    {{ csrf_field() }}
+
+                                                                                    <button type="submit" class="btn btn-primary" style="background-color: transparent; border: 0; padding: 0;"><img src="{{ url('img/flaticon/trash.png') }}" alt="Del" width="15px"></button>
+
+                                                                                    <script>
+                                                                                        const handleNf = () => {
+                                                                                            let nfs = document.querySelectorAll(".form-group.nf");
+                                                                                            console.log(nfs);
+
+                                                                                            nfs.forEach((item) => {
+                                                                                                console.log(item);
+                                                                                            });
+                                                                                        }
+
+                                                                                        const handleDelete = (e) => {
+                                                                                            var deleteForm = document.querySelector('.delete-form');
+                                                                                            var editForm = document.querySelector('#edit-form');
+
+                                                                                            deleteForm.addEventListener('submit', function(event) {
+                                                                                                // event.preventDefault();
+                                                                                                preventEditFormSubmit();
+                                                                                            });
+
+                                                                                            function preventEditFormSubmit() {
+                                                                                                editForm.addEventListener('submit', function(event) {
+                                                                                                    event.preventDefault();
+                                                                                                });
+                                                                                            }
+                                                                                        }
+
+
+                                                                                        const handleEdit = () => {
+                                                                                            var deleteForm = document.querySelector('#delete-form');
+                                                                                            var editForm = document.querySelector('#edit-form');
+
+                                                                                            editForm.addEventListener('submit', function(event) {
+                                                                                                // event.preventDefault();
+                                                                                                preventRemoveFormSubmit();
+                                                                                            });
+
+                                                                                            function preventRemoveFormSubmit() {
+
+                                                                                            }
+                                                                                        }
+
+
+                                                                                    </script>
+
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+
+                                                                @endforeach
+                                                            @endif
+                                                        </div>
+
+
+
+                                                        {{-- @foreach ($budget as $nf)
+                                                            @if ($nf["id_service"] == $services[$i]['id'])
+                                                                <div class="form-group nf" style="min-width: 230px">
+                                                                    <div class="nf-item">
+                                                                        <a href="{{ route('pdf', $nf["id_budget"]) }}" target="_blank" style="margin-right: 5px">Ver nota {{ $nf["id_budget"] }}</a>
+                                                                    </div>
+
+                                                                    <div class="nf-item">
+                                                                        <form action="{{ route('budget.destroy', $nf["id_budget"]) }}" method="post" style="padding:  0;">
+                                                                            @method('delete')
+                                                                            {{ csrf_field() }}
+
+                                                                            <button type="submit" class="btn btn-primary" style="background-color: transparent; border: 0; padding: 0;"><img src="{{ url('img/flaticon/trash.png') }}" alt="Del" width="15px"></button>
+                                                                        </form>
+
+                                                                    </div>
                                                                 </div>
+                                                            @endif
+                                                        @endforeach --}}
 
-                                                                <div class="nf-item">
-                                                                    <form action="{{ route('budget.destroy', $nf["id_budget"]) }}" method="post" style="padding:  0;">
-                                                                        @method('delete')
-                                                                        {{ csrf_field() }}
+                                                        {{-- <div class="form-group" style="min-width: 230px">
+                                                            @if ($services[$i]["status"] == 1)
 
-                                                                        <button type="submit" class="btn btn-primary" style="background-color: transparent; border: 0; padding: 0;"><img src="{{ url('img/flaticon/trash.png') }}" alt="Del" width="15px"></button>
-                                                                    </form>
+                                                            @endif
+                                                        </div> --}}
 
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach --}}
+                                                        <div class="modal-footer" style="min-width: 230px">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                            <button type="submit" class="btn btn-primary" onclick="handleEdit()">Salvar</button>
+                                                        </div>
+                                                    </form>
 
-                                                    {{-- <div class="form-group" style="min-width: 230px">
-                                                        @if ($services[$i]["status"] == 1)
-
-                                                        @endif
-                                                    </div> --}}
-
-                                                    <div class="modal-footer" style="min-width: 230px">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                        <button type="submit" class="btn btn-primary" onclick="handleEdit()">Salvar</button>
-                                                    </div>
-                                                </form>
-
-                                            </div>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -304,7 +324,7 @@
       </div>
       <div class="modal-body">
 
-        <form action="{{ route('service.post') }}" method="POST">
+        <form action="{{ route('service.post') }}" method="POST" class="auth-form">
           {{ csrf_field() }}
           <div class="form-group" style="min-width: 230px">
             <label for="name" class="col-form-label">Nome:</label>
