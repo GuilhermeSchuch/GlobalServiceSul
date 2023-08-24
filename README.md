@@ -9,6 +9,7 @@ A Freelancer project for [GlobalServiceSul](https://www.facebook.com/GlobalServi
 
 - [About](#about)
 - [Demo](#demo)
+- [Features](#features)
 - [Contact](#features)
 
 ## About
@@ -18,7 +19,6 @@ This is a management web application made with Laravel. The primary objective of
 ## Demo
 
 **Home Page of the application**
-
 
 
 <img src="/public/img/global_home.jpg" width="500"/>
