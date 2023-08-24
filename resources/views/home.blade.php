@@ -5,4 +5,4 @@
     <img src="img/logo.png" alt="">
 </div>
 
-<h1 style="color: red">GERAÇÃO PDF JÁ FUNCIONANDO, ARRUMANDO ESTILIZAÇÃO</h1>
+
